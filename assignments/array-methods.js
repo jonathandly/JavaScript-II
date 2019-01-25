@@ -56,28 +56,70 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
 let fullName = [];
+runners.forEach(function(el) {
+    fullName.push(`${el.first_name} ${el.last_name}`);
+})
 console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
 let allCaps = [];
+const upperCased = runners.map((fName) => {
+    fName = fName.first_name.toUpperCase();
+    return allCaps.push(fName);
+});
 console.log(allCaps); 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
 let largeShirts = [];
+const big = runners.filter(el => {
+    if(el.shirt_size === 'L') {
+        return largeShirts.push(el);
+    }
+});
 console.log(largeShirts);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
 let ticketPriceTotal = [];
+ticketPriceTotal = runners.reduce(function(accumulator, currentValue) {
+    return accumulator + currentValue.donation;
+}, 0);
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+/*  Return all people who donated more than $250.00. */
+let lgDonators = [];
+const bigDonation = runners.filter(function(el) {
+    if(el.donation >= 250) {
+        return lgDonators.push(`${el.first_name} ${el.last_name} donated \$${el.donation.toFixed(2)} dollars.`);
+    }
+});
+console.log(lgDonators);
 
 // Problem 2
+/* Return all the runners last names in alphabetical order. */
+let alphabetizedLastNames = [];
+const sortedLastName = runners.map(function (lName) {
+    lName = lName.last_name;
+    alphabetizedLastNames.push(lName);
+    alphabetizedLastNames.sort();
+});
+console.log(alphabetizedLastNames);
 
 // Problem 3
+/* Return the total amount donated with donations of less than $100.00. */
+let smallDonations = [];
+const small = runners.filter(function(el) {
+    if(el.donation <= 100) {
+       return smallDonations.push(el.donation);
+    }
+});
+smallDonations = smallDonations.reduce(function(accumulator, currentValue) {
+    return accumulator + currentValue; 
+}, 0);
+console.log(smallDonations);

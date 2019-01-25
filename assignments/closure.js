@@ -1,11 +1,30 @@
 // ==== Challenge 1: Write your own closure ====
 // Write a simple closure of your own creation.  Keep it simple!
-
+let c = 1738;
+function timesPI(x) {
+  x = (Math.PI * x);
+  return function(n) {
+    return (n * x);
+  }
+}
+const multiplyPI = timesPI(50);
+let xPI = multiplyPI(c);
+console.log(xPI.toFixed(9));
 
 // ==== Challenge 2: Create a counter function ====
+
 const counter = () => {
   // Return a function that when invoked increments and returns a counter variable.
+  let count = 0;
+  return function() {
+    return ++count;
+  }
 };
+const newCounter = counter();
+//console.log(newCounter);
+console.log(newCounter());
+console.log(newCounter());
+
 // Example usage: const newCounter = counter();
 // newCounter(); // 1
 // newCounter(); // 2
@@ -17,4 +36,19 @@ const counterFactory = () => {
   // Return an object that has two methods called `increment` and `decrement`.
   // `increment` should increment a counter variable in closure scope and return it.
   // `decrement` should decrement the counter variable and return it.
+  let count = 1000;
+  return obj = {
+    increment: function() {
+      return count += 1;
+    },
+    decrement: function() {
+      return count -= 1;
+    }
+  }
 };
+
+const incrementDecrement = counterFactory();
+console.log(incrementDecrement.increment());
+console.log(incrementDecrement.increment());
+console.log(incrementDecrement.decrement());
+console.log(incrementDecrement.decrement());
